@@ -2,7 +2,9 @@
 'use strict'
 
 var mainProcess = ( function() {   
-    
+    var hasOffer = false;
+    var isInShopList = true;
+
     function getShopDomain(url) {
         var temp = url.toString();
         var arr = temp.split("/");  
@@ -28,19 +30,29 @@ var mainProcess = ( function() {
                                         success: function (data) {
                                             var title = '';
                                             JSON.parse(data, function (key, value) {
-                                                if(key == 'title'){
+                                                if(key == 'title') {
                                                     title = value;
-                                                    console.log("title", title);
                                                 }
+
                                                 if(key == "url") {
                                                     $("#offerItem").append('<a class="item" href="' + value + '" target="_blank">' + title + '</a><div class="divider"></div>');
+                                                    hasOffer = true;
+                                                    isInShopList = true;
                                                 }
                                             });
+
+                                            if( hasOffer == false)
+                                                $("#offerItem").append('<span>No Offers</span>');    
                                         }
                                     });
+                                } else {
+                                    isInShopList = false;
                                 }
-                            }
+                            } 
                         });
+
+                        // if(isInShopList == false)
+                        //     $("#offerItem").append('<span>Not In Our Shoplist</span>');    
                     }
                 });
             });
