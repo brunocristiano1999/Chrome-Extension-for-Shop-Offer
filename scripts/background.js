@@ -15,11 +15,9 @@ Feed.update = () => {
 					const page = {
                         id: count,
 						domain: Utils.getBaseUrl(temp[count]),
-						expireAt: 0,
-						animateAt: 0,
-						hiddenUntil: 0,
-						cashback: {},
-						sales: {}
+						type: '',
+						title: '',
+						url: '',
 					};
                     pages.pages[count] = page;
                     count++;
@@ -48,31 +46,57 @@ chrome.runtime.onInstalled.addListener((details) => {
         }
 });
 
+Pages = {};
+
+Pages.getPageForContent = (domain, callback) => {
+	chrome.storage.local.get('pages', (pages) => {
+		const parsed = psl.parse(domain);
+        
+		const result = _.find(pages.pages, (item) => {
+			return (item.domain === domain || item.domain === parsed.domain);
+		});
+
+		if (result) {
+			Pages.updatePage(result, (page) => {
+				chrome.storage.local.set(pages);
+                callback(page);
+		    });
+		} else {
+			callback(false);
+		}
+	});
+};
+
+Pages.updatePage = (page, callback) => {
+	chrome.storage.local.get('pages', (pages) => {
+        $.getJSON('https://toolbarapi.modio.cz/get-data?url=' + page.domain, (data) => {	
+            const temp = data.data;
+            
+            if(temp.length > 0) {
+                page.type = temp[0].type;
+                page.title = temp[0].title;
+                page.url = temp[0].url;
+            }
+
+            chrome.storage.local.set(pages);
+            callback(page);
+        });
+	});	
+};
+
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     switch (request.reason) {
         case 'page_data_for_content':
             chrome.tabs.query({active: true}, (tabs) => {
-                if (referrals[sender.tab.id] && referrals[sender.tab.id].collision) {
-					Pages.setHide(request.domain, moment().add(1, 'day').unix());					
-                    console.log("1");
-                    
-                    sendResponse(false);
-				} else {	
-                    console.log("2");				
-					Pages.getPageForContent(request.domain, (page) => {						
-						if (page) {
-                            
-                            
-							sendResponse(page);
-						} else {
-                            console.log("3");
-                            
-							sendResponse(false);
-						}
-					});
-				}
+                Pages.getPageForContent(request.domain, (page) => {						
+                    if (page) {
+                        sendResponse(page);
+                    } else {
+                        sendResponse(false);
+                    }
+                });
             });
-            
             return true;
     }
 })
@@ -87,10 +111,6 @@ chrome.webRequest.onBeforeRedirect.addListener(
 				collision: false
 			}
 		}			
-
-		if (Referral.detect(details.url)) {
-			referrals[details.tabId].collision = true;			
-		}
 	},
 	{
 		'urls': ['<all_urls>'],

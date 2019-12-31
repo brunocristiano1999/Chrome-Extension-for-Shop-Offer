@@ -8,5 +8,4 @@ chrome.runtime.sendMessage({
     reason: 'page_data_for_content',
     domain: Utils.getBaseUrl(location.host)
 }, (page) => {
-    
 });
