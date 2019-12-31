@@ -24,9 +24,6 @@ Feed.update = () => {
 				});
 
 				chrome.storage.local.set(pages);
-
-				// Set feed update
-                chrome.storage.local.set({'feedUpdate': moment().unix()});
 			});
 		});
 };
@@ -41,7 +38,7 @@ chrome.runtime.onInstalled.addListener((details) => {
     switch(details.reason) {
         case "install":
             Feed.update();
-            //chrome.tabs.create({ url: "https://www.modio.cz/"});
+            chrome.tabs.create({ url: "https://www.modio.cz/"});
             break;
         }
 });
@@ -71,7 +68,9 @@ Pages.updatePage = (page, callback) => {
 	chrome.storage.local.get('pages', (pages) => {
         $.getJSON('https://toolbarapi.modio.cz/get-data?url=' + page.domain, (data) => {	
             const temp = data.data;
+            console.log("data", data);
             
+
             if(temp.length > 0) {
                 page.type = temp[0].type;
                 page.title = temp[0].title;
