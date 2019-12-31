@@ -8,17 +8,27 @@
     "128": "assets/images/icon128.png"
   },
   "permissions": [
-    "tabs",
-    "https://*/*"
+    "tabs", "https://*/*", "storage", "webRequest", "\u003Call_urls>"
   ],
   "browser_action": {
     "default_title": "Modio",
     "default_popup": "html/popup.html"
   },
   "background": {
-    "scripts": ["scripts/background.js"],
+    "scripts": ["scripts/background.js", "scripts/vendor/jquery-3.2.1.min.js", "scripts/vendor/moment.min.js", "scripts/vendor/psl.min.js", "scripts/vendor/underscore-min.js"],
     "persistant": false
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/content.js", "scripts/vendor/jquery-3.2.1.min.js", "scripts/vendor/moment.min.js", "scripts/vendor/psl.min.js", "scripts/vendor/underscore-min.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
 }
