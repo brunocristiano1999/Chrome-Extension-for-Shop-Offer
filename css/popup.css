@@ -1,19 +1,21 @@
-body {
-    width: 250px;
-    height: 300px;
-    margin: 0px;
+.modio-container {
+    width: 240px;
+    height: 290px;
+    margin-top: -10px;
+    margin-left: -10px;
+    margin-right: -10px;
 }
 
-.header {
+.modio-header {
     height:  40px;
 }
 
-#logo {
+#modio-logo {
     width: 40px;
     height: 40px;
 }
 
-.banner {
+.modio-banner {
     width: 100%;
     height: 40px;
     background-color: #347CFF;
@@ -21,19 +23,19 @@ body {
     color:white;
 }
 
-#bannerText {
+#modio-bannerText {
     padding-top: 5px;
     font-size: 20px;
     font-weight: 500;
 }
 
-.offer {
+.modio-offer {
     width: 100%;
     text-align: center;
     padding-top: 10px;
 }
 
-.item {
+.modio-item {
     width: 100%; 
     font-size: 16px; 
     text-decoration: none;
@@ -43,35 +45,35 @@ body {
     margin-bottom: 10px;
 }
 
-.divider {
+.modio-divider {
     width: 100%;
     height: 1px;
     margin-top: 10px;
     background-color: lightgray;
 }
 
-.footer {
+.modio-footer {
     position: fixed; 
     left: 0; 
     bottom: 0; 
     width: 100%;
 }
 
-#footerButton {
+#modio-footerButton {
     width: 100%;
     height: 40px;
     border: none;
     background-color: #347CFF;
 }
 
-#footerLogo {
+#modio-footerLogo {
     margin-top: 20px;
     margin-left: 15px;
     font-size: 14px;
     color: white;
 }
 
-.noOffer {
+.modio-noOffer {
     font-size: 16px;
     font-weight: 500;
 }

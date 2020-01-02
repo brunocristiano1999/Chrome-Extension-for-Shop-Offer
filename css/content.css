@@ -1,0 +1,93 @@
+.modio-container {
+    position: fixed;
+    display: block;
+    right: 25px;
+    bottom: 25px;
+    z-index: 9999999999999999;
+    background-color: white;
+    border: 1px solid black;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    width: 250px;
+    height: 300px;
+}
+
+.modio-header { 
+    height:  40px;
+}
+
+#modio-logo {
+    width: 40px;
+    height: 40px;
+}
+
+#modio-close {
+    float: right;
+    margin-top: 3px;
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.modio-banner {
+    width: 100%;
+    height: 40px;
+    background-color: #347CFF;
+    text-align: center; 
+    color:white;
+}
+
+#modio-bannerText {
+    padding-top: 5px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.modio-offer {
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.modio-item {
+    width: 100%; 
+    font-size: 16px; 
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    margin-top: 10px;;
+    margin-bottom: 10px;
+}
+
+.modio-divider {
+    width: 100%;
+    height: 1px;
+    margin-top: 10px;
+    background-color: lightgray;
+}
+
+.modio-footer {
+    position: fixed; 
+    bottom: 26px;
+    right: 26px; 
+    width: 248px;
+}
+
+#modio-footerButton {
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: #347CFF;
+}
+
+#modio-footerLogo {
+    margin-top: 20px;
+    margin-left: 15px;
+    font-size: 14px;
+    color: white;
+}
+
+.modio-noOffer {
+    font-size: 16px;
+    font-weight: 500;
+}

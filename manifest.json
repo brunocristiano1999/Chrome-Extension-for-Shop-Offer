@@ -20,6 +20,7 @@
   },
   "content_scripts": [
     {
+      "css": [ "css/content.css" ],
       "matches": [
         "<all_urls>"
       ],

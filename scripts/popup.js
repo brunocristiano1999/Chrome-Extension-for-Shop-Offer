@@ -6,9 +6,6 @@ Utils.getBaseUrl = (url) => {
 };
 
 var mainProcess = ( function() {   
-    var hasOffer = false;
-    var isInShopList = true;
-
     return {
         onload: function () {
             chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
@@ -19,10 +16,12 @@ var mainProcess = ( function() {
                     reason: 'page_data_for_content',
                     domain: domain
                 }, (page) => {
-                    if(page.type != '') {
-                        $("#offerItem").append('<a class="item" href="' + page.url + '" target="_blank">' + page.title + '</a><div class="divider"></div>');
-                    } else {
-                        $("#offerItem").append('<span class="noOffer">No Offers</span>');
+                    if(page != false) {
+                        if(page.type != '') {
+                            $("#modio-offerItem").append('<a class="modio-item" href="' + page.url + '" target="_blank">' + page.title + '</a><div class="modio-divider"></div>');
+                        } else {
+                            $("#modio-offerItem").append('<span class="modio-noOffer">No Offers</span>');
+                        }
                     }
                 });
             });
